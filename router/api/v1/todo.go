@@ -6,6 +6,12 @@ import (
 	"todo/services"
 )
 
+// @Summary Get All
+// @Produce json
+// @Success 200 {object} resp.Response
+// @Failure 400 {object} resp.Response
+// @Failure 500 {object} resp.Response
+// @Router /api/v1/todos [get]
 func GetAllTodo(c *gin.Context) {
 	service := services.TodoService{}
 	todos, err := service.GetAll()
@@ -16,6 +22,13 @@ func GetAllTodo(c *gin.Context) {
 	resp.OK(c, gin.H{"todos": todos}, "get all todo")
 }
 
+// @Summary Get By ID
+// @Produce json
+// @Param id path int true "ID"
+// @Success 200 {object} resp.Response
+// @Failure 400 {object} resp.Response
+// @Failure 500 {object} resp.Response
+// @Router /api/v1/todos/{id} [get]
 func GetTodoByID(c *gin.Context) {
 	service := services.TodoService{}
 	err := c.ShouldBindUri(&service)
@@ -31,6 +44,13 @@ func GetTodoByID(c *gin.Context) {
 	resp.OK(c, gin.H{"todo": todo}, "get todo by id")
 }
 
+// @Summary Add
+// @Produce json
+// @Param title body string true "Title"
+// @Success 200 {object} resp.Response
+// @Failure 400 {object} resp.Response
+// @Failure 500 {object} resp.Response
+// @Router /api/v1/todos [post]
 func AddTodo(c *gin.Context) {
 	service := services.TodoService{}
 	err := c.ShouldBind(&service)
@@ -46,6 +66,13 @@ func AddTodo(c *gin.Context) {
 	resp.OK(c, gin.H{"todo": todo}, "created")
 }
 
+// @Summary Delete
+// @Produce json
+// @Param id path int true "ID"
+// @Success 200 {object} resp.Response
+// @Failure 400 {object} resp.Response
+// @Failure 500 {object} resp.Response
+// @Router /api/v1/todos/{id} [delete]
 func DeleteTodo(c *gin.Context) {
 	service := services.TodoService{}
 	err := c.ShouldBindUri(&service)
@@ -61,6 +88,14 @@ func DeleteTodo(c *gin.Context) {
 	resp.OK(c, nil, "deleted")
 }
 
+// @Summary Update
+// @Produce json
+// @Param id path int true "ID"
+// @Param title body string true "Title"
+// @Success 200 {object} resp.Response
+// @Failure 400 {object} resp.Response
+// @Failure 500 {object} resp.Response
+// @Router /api/v1/todos/{id} [put]
 func UpdateTodo(c *gin.Context) {
 	service := services.TodoService{}
 	err := c.ShouldBindUri(&service)
