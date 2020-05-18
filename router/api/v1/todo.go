@@ -11,7 +11,7 @@ import (
 // @Success 200 {object} resp.Response
 // @Failure 400 {object} resp.Response
 // @Failure 500 {object} resp.Response
-// @Router /api/v1/todos [get]
+// @Router /todos [get]
 func GetAllTodo(c *gin.Context) {
 	service := services.TodoService{}
 	todos, err := service.GetAll()
@@ -28,7 +28,7 @@ func GetAllTodo(c *gin.Context) {
 // @Success 200 {object} resp.Response
 // @Failure 400 {object} resp.Response
 // @Failure 500 {object} resp.Response
-// @Router /api/v1/todos/{id} [get]
+// @Router /todos/{id} [get]
 func GetTodoByID(c *gin.Context) {
 	service := services.TodoService{}
 	err := c.ShouldBindUri(&service)
@@ -50,7 +50,7 @@ func GetTodoByID(c *gin.Context) {
 // @Success 200 {object} resp.Response
 // @Failure 400 {object} resp.Response
 // @Failure 500 {object} resp.Response
-// @Router /api/v1/todos [post]
+// @Router /todos [post]
 func AddTodo(c *gin.Context) {
 	service := services.TodoService{}
 	err := c.ShouldBind(&service)
@@ -72,7 +72,7 @@ func AddTodo(c *gin.Context) {
 // @Success 200 {object} resp.Response
 // @Failure 400 {object} resp.Response
 // @Failure 500 {object} resp.Response
-// @Router /api/v1/todos/{id} [delete]
+// @Router /todos/{id} [delete]
 func DeleteTodo(c *gin.Context) {
 	service := services.TodoService{}
 	err := c.ShouldBindUri(&service)
@@ -95,7 +95,7 @@ func DeleteTodo(c *gin.Context) {
 // @Success 200 {object} resp.Response
 // @Failure 400 {object} resp.Response
 // @Failure 500 {object} resp.Response
-// @Router /api/v1/todos/{id} [put]
+// @Router /todos/{id} [put]
 func UpdateTodo(c *gin.Context) {
 	service := services.TodoService{}
 	err := c.ShouldBindUri(&service)

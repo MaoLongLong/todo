@@ -15,10 +15,10 @@
         },
         "version": "1.0"
     },
-    "host": "petstore.swagger.io",
-    "basePath": "/v2",
+    "host": "localhost:9090",
+    "basePath": "/api/v1",
     "paths": {
-        "/api/v1/todos": {
+        "/todos": {
             "get": {
                 "produces": [
                     "application/json"
@@ -83,7 +83,7 @@
                 }
             }
         },
-        "/api/v1/todos/{id}": {
+        "/todos/{id}": {
             "get": {
                 "produces": [
                     "application/json"

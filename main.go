@@ -1,6 +1,8 @@
 package main
 
 import (
+	"todo/dao"
+	"todo/models"
 	"todo/router"
 )
 
@@ -16,20 +18,20 @@ import (
 // @license.name Apache 2.0
 // @license.url http://www.apache.org/licenses/LICENSE-2.0.html
 
-// @host petstore.swagger.io
-// @BasePath /v2
+// @host localhost:9090
+// @BasePath /api/v1
 func main() {
-	//err := dao.InitMySQL()
-	//if err != nil {
-	//	panic(err)
-	//}
-	//defer dao.DB.Close()
-	//dao.DB.LogMode(true)
-	//
-	//err = models.Migrate()
-	//if err != nil {
-	//	panic(err)
-	//}
+	err := dao.InitMySQL()
+	if err != nil {
+		panic(err)
+	}
+	defer dao.DB.Close()
+	dao.DB.LogMode(true)
+
+	err = models.Migrate()
+	if err != nil {
+		panic(err)
+	}
 
 	r := router.NewRouter()
 	r.Run(":9090")
