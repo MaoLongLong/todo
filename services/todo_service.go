@@ -6,7 +6,7 @@ import (
 )
 
 type TodoService struct {
-	ID    uint   `json:"id" form:"id"`
+	ID    uint   `uri:"id"`
 	Title string `json:"title" form:"title"`
 }
 

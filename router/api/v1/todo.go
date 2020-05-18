@@ -2,7 +2,6 @@ package v1
 
 import (
 	"github.com/gin-gonic/gin"
-	"strconv"
 	"todo/pkg/resp"
 	"todo/services"
 )
@@ -18,12 +17,12 @@ func GetAllTodo(c *gin.Context) {
 }
 
 func GetTodoByID(c *gin.Context) {
-	id, err := strconv.Atoi(c.Param("id"))
+	service := services.TodoService{}
+	err := c.ShouldBindUri(&service)
 	if err != nil {
-		resp.BadRequest(c, nil, "param invalid")
+		resp.BadRequest(c, nil, err.Error())
 		return
 	}
-	service := services.TodoService{ID: uint(id)}
 	todo, err := service.GetByID()
 	if err != nil {
 		resp.InternalServerError(c, nil, err.Error())
@@ -48,12 +47,12 @@ func AddTodo(c *gin.Context) {
 }
 
 func DeleteTodo(c *gin.Context) {
-	id, err := strconv.Atoi(c.Param("id"))
+	service := services.TodoService{}
+	err := c.ShouldBindUri(&service)
 	if err != nil {
-		resp.BadRequest(c, nil, "param invalid")
+		resp.BadRequest(c, nil, err.Error())
 		return
 	}
-	service := services.TodoService{ID: uint(id)}
 	err = service.DeleteByID()
 	if err != nil {
 		resp.InternalServerError(c, nil, err.Error())
@@ -63,18 +62,17 @@ func DeleteTodo(c *gin.Context) {
 }
 
 func UpdateTodo(c *gin.Context) {
-	id, err := strconv.Atoi(c.Param("id"))
+	service := services.TodoService{}
+	err := c.ShouldBindUri(&service)
 	if err != nil {
-		resp.BadRequest(c, nil, "param invalid")
+		resp.BadRequest(c, nil, err.Error())
 		return
 	}
-	service := services.TodoService{}
 	err = c.ShouldBind(&service)
 	if err != nil {
 		resp.BadRequest(c, nil, err.Error())
 		return
 	}
-	service.ID = uint(id)
 	todo, err := service.UpdateByIdAndTitle()
 	if err != nil {
 		resp.InternalServerError(c, nil, err.Error())
